@@ -9,4 +9,3 @@
 4、待完善功能：支持小程序的菜单、个性化菜单
 
 ----2017.06.20 eatage 346414491@qq.com
-----获取最新代码：http://code.taobao.org/svn/wechatmenu/
