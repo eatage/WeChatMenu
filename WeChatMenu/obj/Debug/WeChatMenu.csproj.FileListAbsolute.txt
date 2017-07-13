@@ -1,0 +1,7 @@
+C:\Users\bo\Source\Repos\WeChatMenu\WeChatMenu\bin\WeChatMenu.dll.config
+C:\Users\bo\Source\Repos\WeChatMenu\WeChatMenu\bin\WeChatMenu.dll
+C:\Users\bo\Source\Repos\WeChatMenu\WeChatMenu\bin\WeChatMenu.pdb
+C:\Users\bo\Source\Repos\WeChatMenu\WeChatMenu\bin\Newtonsoft.Json.dll
+C:\Users\bo\Source\Repos\WeChatMenu\WeChatMenu\obj\Debug\WeChatMenu.csprojResolveAssemblyReference.cache
+C:\Users\bo\Source\Repos\WeChatMenu\WeChatMenu\obj\Debug\WeChatMenu.dll
+C:\Users\bo\Source\Repos\WeChatMenu\WeChatMenu\obj\Debug\WeChatMenu.pdb

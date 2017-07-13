@@ -53,6 +53,7 @@
   <ItemGroup>
     <Content Include="css\wechatmenu.css" />
     <Content Include="js\jquery-2.0.0.min.js" />
+    <Content Include="js\json.js" />
     <Content Include="js\wechatmenu.js" />
     <Content Include="lib\Newtonsoft.Json.dll" />
     <Content Include="remark.txt" />
