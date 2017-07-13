@@ -17,7 +17,7 @@
         if (i === 0) tablehtml += '<tr><td class="td_shengru">主菜单按钮</td>';
         else tablehtml += '<tr><td class="td_shengru">二级菜单No.' + i + '</td>';
         for (var j = 0; j < 3; j++) {
-            var id = (j + 1) + '';
+            var id = j + 1 + '';
             if (i > 0) id += i;
             var tableclass = "";
             if (i > 0) tableclass += ' top' + (j + 1);
@@ -43,7 +43,7 @@
         }
     }
     chengesel('DDL_Top1', 1); chengesel('DDL_Top2', 2); chengesel('DDL_Top3', 3);
-})
+});
 $(document).ready(function () {
     $("button").click(function () {
         switch (this.id) {
@@ -145,7 +145,7 @@ function getmenu() {
                             continue;
                         } else {
                             //有子菜单
-                            var num = json.menu.button[i].sub_button.length
+                            var num = json.menu.button[i].sub_button.length;
                             for (var j = 0; j < num; j++) {
                                 var _type = json.menu.button[i].sub_button[j].type;
                                 var _name = json.menu.button[i].sub_button[j].name;
@@ -307,7 +307,7 @@ function chengesel(sel, num) {
     var value = $("#" + sel).val();
     if (value === "") {
         $(".top" + num).fadeIn(200);
-        $("#txt_Key" + num).attr("disabled", "disabled")
+        $("#txt_Key" + num).attr("disabled", "disabled");
     }
     else {
         $(".top" + num).fadeOut(200);
@@ -373,7 +373,7 @@ function openDownloadDialog(url, saveName) {
  * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
  *@method 格式化日期
  *@param {Date}fmt 日期
- *@param {object}function 回调
+ *@param {object}function 匿名函数
  *@return {string}格式化的日期
  */
 Date.prototype.Format = function (fmt) { //author: meizz 
@@ -388,6 +388,6 @@ Date.prototype.Format = function (fmt) { //author: meizz
     };
     if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
     for (var k in o)
-        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
     return fmt;
-}
+};
