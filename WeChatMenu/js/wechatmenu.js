@@ -123,7 +123,7 @@ function getmenu() {
             dataType: "text",
             url: "WeChatMenu.ashx",
             data: { action: 'GETMENU', appid: $("#txt_appid").val(), appsecret: $("#txt_appsecret").val() },
-            async: false,
+            async: true,
             success: function (data) {
                 var json = eval("(" + data + ")");
                 if (json.errmsg !== undefined) {
@@ -239,7 +239,7 @@ function updatemenu(menu) {
                 dataType: "text",
                 url: "WeChatMenu.ashx",
                 data: { action: 'UPDATEMENU', appid: $("#txt_appid").val(), appsecret: $("#txt_appsecret").val(), json: _json },
-                async: false,
+                async: true,
                 success: function (data) {
                     var json = eval("(" + data + ")");
                     dialogMsg(json.errmsg);
@@ -278,7 +278,7 @@ function delmenu() {
             dataType: "text",
             url: "WeChatMenu.ashx",
             data: { action: 'DELETEMENU', appid: $("#txt_appid").val(), appsecret: $("#txt_appsecret").val() },
-            async: false,
+            async: true,
             success: function (data) {
                 var json = eval("(" + data + ")");
                 dialogMsg(json.errmsg);

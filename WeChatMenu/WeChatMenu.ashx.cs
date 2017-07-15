@@ -44,7 +44,7 @@ namespace WeChatMenu
                 return "{\"errcode\":-2,\"errmsg\":\"Appid或AppSecret不能为空\" }";
             string access_token = "";
             if (!Get_Access_token(appid, appsecret, out access_token))
-                return "{\"errcode\":-2,\"errmsg\":\"" + access_token + "\" }";
+                return access_token;
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/get?access_token={0}", access_token);
             string ls_rc = HttpGet(url);//获取当前菜单
             JObject json = JObject.Parse(ls_rc);
@@ -59,7 +59,7 @@ namespace WeChatMenu
                 return "{\"errcode\":-2,\"errmsg\":\"Appid或AppSecret不能为空\" }";
             string access_token = "";
             if (!Get_Access_token(appid, appsecret, out access_token))
-                return "{\"errcode\":-2,\"errmsg\":\"" + access_token + "\" }";
+                return access_token;
             if (string.IsNullOrEmpty(json))
                 return "{\"errcode\":-2,\"errmsg\":\"json不能为空\" }";
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/create?access_token={0}", access_token);
@@ -77,7 +77,11 @@ namespace WeChatMenu
             if (jo["errmsg"].ToString() == "ok")
                 return "{\"errcode\":0,\"errmsg\":\"菜单更新成功\" }";
             else
+            {
+                if (jo["errcode"].ToString() == "40013")
+                    jo["errmsg"] = "不合法的access_token，请开发者认真比对access_token的有效性（如是否过期），或查看是否正在为恰当的公众号调用接口";
                 return "{\"errcode\":-2,\"errmsg\":\"菜单更新失败<br>" + jo["errmsg"].ToString() + "\" }";
+            }
         }
         /// <summary>
         /// 删除菜单
@@ -88,7 +92,7 @@ namespace WeChatMenu
                 return "{\"errcode\":-2,\"errmsg\":\"Appid或AppSecret不能为空\" }";
             string access_token = "";
             if (!Get_Access_token(appid, appsecret, out access_token))
-                return "{\"errcode\":-2,\"errmsg\":\"" + access_token + "\" }";
+                return access_token;
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/delete?access_token={0}", access_token);
             string ls_Message = HttpGet(url);//获取当前菜单
             JObject json = JObject.Parse(ls_Message);
@@ -119,10 +123,21 @@ namespace WeChatMenu
             string url = string.Format("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={0}&secret={1}", ls_appid, ls_secret);
             string ls_rc = HttpGet(url);
             if (ls_rc.Substring(0, 2) == "-1")
-            { access_token = "无法连接到远程服务器，请检查网络设置"; return false; }
+            { access_token = "{\"errcode\":-2,\"errmsg\":\"无法连接到远程服务器，请检查网络设置\" }"; return false; }
             JObject ja = JObject.Parse(ls_rc);
             try { access_token = ja["access_token"].ToString(); }
-            catch { access_token = ls_rc; return false; }
+            catch
+            {
+                if (ja["errcode"].ToString() == "-1")
+                    ja["errmsg"] = "系统繁忙，请稍候再试";
+                if (ja["errcode"].ToString() == "40001")
+                    ja["errmsg"] = "AppSecret错误或者AppSecret不属于这个公众号，请确认AppSecret的正确性";
+                if (ja["errcode"].ToString() == "40164")
+                    ja["errmsg"] = "调用接口的IP地址不在白名单中，请在接口IP白名单中进行设置";
+                if (ja["errcode"].ToString() == "40013")
+                    ja["errmsg"] = "无效的Appid";
+                access_token = ja.ToString(); return false;
+            }
             System.Web.HttpContext.Current.Session["appid"] = access_token;
             return true;
         }
