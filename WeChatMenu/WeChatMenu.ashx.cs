@@ -115,8 +115,8 @@ namespace WeChatMenu
         /// <param name="secret">appsecret</param>
         private bool Get_Access_token(string appid, string appsecret, out string access_token)
         {
-            if (System.Web.HttpContext.Current.Session["appid"] != null)
-            { access_token = System.Web.HttpContext.Current.Session["appid"].ToString(); return true; }
+            if (System.Web.HttpContext.Current.Session[appid] != null)
+            { access_token = System.Web.HttpContext.Current.Session[appid].ToString(); return true; }
             string ls_appid = appid.Replace(" ", "");
             string ls_secret = appsecret.Replace(" ", "");
             access_token = "";
@@ -138,7 +138,7 @@ namespace WeChatMenu
                     ja["errmsg"] = "无效的Appid";
                 access_token = ja.ToString(); return false;
             }
-            System.Web.HttpContext.Current.Session["appid"] = access_token;
+            System.Web.HttpContext.Current.Session[appid] = access_token;
             return true;
         }
         /// <summary>
