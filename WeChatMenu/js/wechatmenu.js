@@ -132,6 +132,7 @@ function getmenu() {
                 }
                 if (json.menu.button[0] !== undefined) {
                     for (var i = 0; i < 3; i++) {
+                        if (json.menu.button[i] === undefined) break;
                         var type = json.menu.button[i].type;
                         var name = json.menu.button[i].name;
                         var keyOrUrl = '';
