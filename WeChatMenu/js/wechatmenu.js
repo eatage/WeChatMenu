@@ -218,7 +218,8 @@ function getJson() {
                     json += '"url": "' + _key + '"},';
                 else
                     json += '"key": "' + _key + '"},';
-
+                if (j === 4)
+                    json = json.substr(0, json.length - 1);
             }
             json += ']},';
         }
